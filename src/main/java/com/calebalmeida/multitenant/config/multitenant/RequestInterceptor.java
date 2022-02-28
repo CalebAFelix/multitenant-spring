@@ -17,31 +17,6 @@ public class RequestInterceptor implements HandlerInterceptor{
 	DataSourceBasedMultiTenantConnectionProviderImpl dsbmtcpi;
 	
 	@Override
-	public boolean preHandle(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			Object handler
-			) throws Exception{
-		String tenantID = request.getHeader("X-TenantId");
-		
-		if(tenantID == null) {
-			response.getWriter().write("X-TenantId not presnet in the Request Header");
-			response.setStatus(400);
-			return false;
-		}
-		
-		boolean ds = dsbmtcpi.verifyDataSource(tenantID);
-		if (ds == false) {
-			response.getWriter().write("X-tenantId does not represent any authorized tenant in our system");
-			response.setStatus(400);
-			return false;
-		}
-		
-		TenantContext.setCurrentTenant(tenantID);
-		return true;
-	}
-	
-	@Override
 	public void postHandle(
 			HttpServletRequest request,
 			HttpServletResponse response,

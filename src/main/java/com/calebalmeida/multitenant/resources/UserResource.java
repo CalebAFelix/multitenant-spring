@@ -21,13 +21,13 @@ public class UserResource {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<User>> findAll() {
 		return ResponseEntity.ok().body(userService.findAll());
 	}
 	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@RequestBody User user) {
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@RequestBody User user) {
 		user = userService.saveUser(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(user.getId()).toUri();
