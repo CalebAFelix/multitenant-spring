@@ -46,7 +46,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter{
 					for (String role : roles) {
 						authorities.add(new SimpleGrantedAuthority(role));
 					}
-					
 					UsernamePasswordAuthenticationToken authenticationToken = 
 							new UsernamePasswordAuthenticationToken(username, null, authorities);
 					SecurityContextHolder.getContext().setAuthentication(authenticationToken);
